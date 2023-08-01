@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Janela do Mac</title>
+    <style>
+        body {
+            font-family: 'PixelFont';
+            background-color: #525252;
+        }
+
+        @font-face {
+          font-family: 'PixelFont';
+          src: url('font/pixelfont.otf') format('truetype');
+        }
+
+
+        .window {
+            width: 90%;
+            height: 85vh; /* Changed height to 100vh */
+            background-color: #f6f6f6;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            margin-left: 10px;
+            margin-top: 10px;
+            z-index: 1000;
+        }
+
+        .title-bar {
+            width: 100%;
+            height: 30px;
+            background-color: #e6e6e6;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .title-bar .title {
+            margin: 0;
+            padding: 5px;
+        }
+
+        .content {
+            padding: 10px;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        .close-button {
+            background-color: red;
+            border-radius: 50%;
+            font-size: 13px;
+            border: 1px solid darkred;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            margin-left: 13px;
+            margin-right: 10px;
+            padding: 0;
+        }
+
+        .nothing-button {
+            background-color: yellow;
+            border-radius: 50%;
+            font-size: 13px;
+            border: 1px solid #ffcc00;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            margin-top: 5px;
+            padding: 0;
+        }
+
+        .upper-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 24px; /* Adjust the height as needed */
+            background-color: #f3f3f3; /* Change the color to your desired color */
+            z-index: 9999; /* Ensure it's above other elements */
+            border-bottom: 1px solid #a8a8a8;
+        }
+
+        /* Dropdown Button */
+        .dropbtn {
+            background: none;
+            color: white;
+            font-size: 17px;
+            border: none;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1001;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 5px 10px;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            font-weight: bold;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: black;
+            color: white;
+            z-index: 1001;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            color: white;
+            background-color: black;
+        }
+
+        #window-title {
+            text-align: center;
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+            font-size: 20px;
+            display: inline-block;
+            max-width: 80%; /* Adjust the width as needed */
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            transform: translateY(-20px);
+        }
+
+        .yellow-div {
+          position: absolute;
+          top: 30px;
+          right: 0;
+          width: 100px;
+          height: 85%;
+          background: none;
+        }
+
+        .red-div {
+          background: none;
+          height: 100px;
+          margin-bottom: 10px;
+          cursor: pointer;
+        }
+
+        .red-div p {
+            background: none;
+            color: white;
+            padding: 1px;
+            border: none;
+            padding: 0;
+            margin: 0;
+            margin-top: 3px;
+            text-align: center;
+        }
+
+        .red-div:hover p {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+
+        .red-div img {
+            width: 60%;
+        }
+
+        .extra {
+            color: black;
+            font-weight: bold;
+            transform: translateY(-20px);
+            margin: 0;
+            padding: 0;
+            margin-right: 10px;
+            font-size: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .trash {
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+            cursor: pointer;
+            background: none;
+        }
+
+        .trash p {
+            color: white;
+            background: none;
+        }
+
+        .trash:hover p {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="upper-bar">
+        <div class="dropdown">
+            <button class="dropbtn">Work</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Favourites</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Social</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+        <div style="text-align: right;"><button class="extra">Felipe Caliento Domingueti</button></div>
+    </div>
+    <br>
+    <div class="window">
+        <div class="title-bar">
+            <button class="close-button" onclick="window.close()">X</button>
+            <button class="nothing-button">-</button>
+            <center><p id="window-title">Start Page</p></center>
+        </div>
+        <div class="content">
+            <p>oioi</p>
+        </div>
+    </div>
+    <!-- Desktop Items -->
+    <div class="yellow-div">
+        <div class="red-div">
+            <center><img src="HD.svg" style="padding-top: 30px; padding-bottom: 10px;"></center>
+            <p>HD Storage</p>
+        </div>
+        <div class="red-div" onclick="setContent('ReadMe')">
+            <center><img src="TextFile.svg"></center>
+            <p>Read Me.txt</p>
+        </div>
+        <div class="red-div" onclick="setContent('startpage')">
+            <center><img src="Folder.svg"></center>
+            <p>Start Page</p>
+        </div>
+        <div class="red-div" onclick="setContent('projects')">
+            <center><img src="Folder.svg"></center>
+            <p>Projects</p>
+        </div>
+    </div>
+
+    <div class="trash" onclick="setContent('trash')">
+        <center><img src="Trash.svg"></center>
+        <p>Trash</p>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setContent("startpage")
+            console.log('All assets are loaded')
+        })
+
+        function setContent(content) {
+            if (content === 'ReadMe') {
+                let contentClass = `
+                <br><iframe src="SubFiles/readme.html" frameborder="0" style="width: 100%; height: 93%;"></iframe>
+                `;
+                document.getElementById('window-title').textContent = 'ReadMe.txt';
+                document.getElementsByClassName("content")[0].innerHTML = contentClass;
+            } else if (content === 'trash') {
+                let contentClass = `
+                <br><iframe src="SubFiles/trash.html" frameborder="0" style="width: 100%; height: 93%;"></iframe>
+                `;
+                document.getElementById('window-title').textContent = 'Trash';
+                document.getElementsByClassName("content")[0].innerHTML = contentClass;
+            } else if (content === 'startpage') {
+                let contentClass = `
+                <br><iframe src="SubFiles/startpage.html" frameborder="0" style="width: 100%; height: 93%;"></iframe>
+                `;
+                document.getElementById('window-title').textContent = 'Start Page';
+                document.getElementsByClassName("content")[0].innerHTML = contentClass;
+            } else if (content === 'projects') {
+                let contentClass = `
+                <br><iframe src="SubFiles/projects.html" frameborder="0" style="width: 100%; height: 93%;"></iframe>
+                `;
+                document.getElementById('window-title').textContent = 'My Projects';
+                document.getElementsByClassName("content")[0].innerHTML = contentClass;
+            }
+        }
+    </script>
+</body>
+</html>
